@@ -18,6 +18,7 @@
     }
   },
   "globals": {
+    "NelioMaps": true,
     "wp": true,
     "wpApiSettings": true,
     "window": true,

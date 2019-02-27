@@ -1,0 +1,23 @@
+div.nelio-maps-google-map {
+
+	.address {
+		background: white;
+		font-size: 0.9rem;
+		margin: 0;
+		padding: 1em;
+		position: absolute;
+		top: 5em;
+
+		&.align-left {
+			left: 0;
+			padding-left: 2em;
+		}
+
+		&.align-right {
+			right: 0;
+			padding-right: 2em;
+		}
+
+	}
+
+}

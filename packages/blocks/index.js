@@ -2,7 +2,7 @@
  * Import the blocks.
  */
 
-import * as demo from './demo';
+import * as map from './google-map';
 
 const {
 	registerBlockType,
@@ -10,10 +10,7 @@ const {
 } = wp.blocks;
 
 [
-	demo,
-
-	// Add more custom blocks here.
-
+	map,
 ].forEach( block => {
 
 	if ( ! block ) {

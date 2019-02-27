@@ -66,32 +66,29 @@ class NELIO_MAPS {
 
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
 
-		// Works only if Gutenberg is available.
-		if ( function_exists( 'register_block_type' ) ) {
-
-			// Add Demo category.
-			add_filter( 'block_categories', [ $this, 'block_categories' ], 9 );
-
-			// Enqueue scripts and styles.
-			add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ], 9 );
-
+		if ( ! function_exists( 'register_block_type' ) ) {
+			return;
 		}//end if
+
+		add_action( 'init', [ $this, 'register_google_maps_api_key_option' ] );
+		add_filter( 'block_categories', [ $this, 'add_extra_category' ], 9 );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ], 9 );
 
 	}//end init_hooks()
 
-	public function block_categories( $categories ) {
+	public function add_extra_category( $categories ) {
 
 		return array_merge(
 			$categories,
 			array(
 				array(
-					'slug'  => 'demo',
-					'title' => __( 'Demo', 'nelio-maps' ),
+					'slug'  => 'extra',
+					'title' => _x( 'Extra', 'text (block category)', 'nelio-maps' ),
 				),
 			)
 		);
 
-	}//end block_categories()
+	}//end add_extra_category()
 
 	public function enqueue_block_editor_assets() {
 
@@ -114,6 +111,9 @@ class NELIO_MAPS {
 			$this->plugin_version
 		);
 
+		$api_key = get_option( 'nelio_maps_api_key_option', '' );
+		wp_localize_script( 'nelio-maps-blocks', 'NelioMaps', [ 'googleMapsApiKey' => $api_key ] );
+
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations( 'nelio-maps-plugin', 'nelio-maps' );
 		}//end if
@@ -131,11 +131,14 @@ class NELIO_MAPS {
 
 	}//end admin_init()
 
-	public function admin_menu() {
+	public function register_google_maps_api_key_option() {
 
-	}//end admin_menu()
+		$api_key = get_option( 'nelio_maps_api_key_option', '' );
+		update_option( 'nelio_maps_api_key_option', $api_key );
 
-}
+	}//end register_google_maps_api_key_option()
+
+}//end class
 
 function nelio_maps() {
 	return NELIO_MAPS::instance();
