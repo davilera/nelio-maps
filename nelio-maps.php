@@ -7,20 +7,20 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://example.com
+ * @link              https://neliosoftware.com
  * @since             1.0.0
- * @package           WP_BEB
+ * @package           NELIO_MAPS
  *
  * @wordpress-plugin
- * Plugin Name: WordPress Block Editor Boilerplate
+ * Plugin Name: Nelio Maps
  * Plugin URI:  https://neliosoftware.com/
- * Description: A standardized, organized, modern foundation for building high-quality WordPress Plugins that extend the block editor.
+ * Description: Simple and beautiful Google Maps block for WordPress.
  * Version:     1.0.0
  * Author:      Nelio Software
  * Author URI:  https://neliosoftware.com
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain: wp-beb
+ * Text Domain: nelio-maps
  * Domain Path: /languages
  */
 
@@ -29,9 +29,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }//end if
 
 /**
- * WP_BEB
+ * NELIO_MAPS
  */
-class WP_BEB {
+class NELIO_MAPS {
 
 	private static $instance = null;
 
@@ -42,10 +42,10 @@ class WP_BEB {
 
 	public static function instance() {
 
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new self();
-            self::$instance->init_options();
-            self::$instance->init_hooks();
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+			self::$instance->init_options();
+			self::$instance->init_hooks();
 		}//end if
 
 		return self::$instance;
@@ -54,11 +54,11 @@ class WP_BEB {
 
 	public function init_options() {
 
-        $this->plugin_path = plugin_dir_path( __FILE__ );
-        $this->plugin_url  = plugin_dir_url( __FILE__ );
+		$this->plugin_path = plugin_dir_path( __FILE__ );
+		$this->plugin_url  = plugin_dir_url( __FILE__ );
 
 		// load textdomain.
-		load_plugin_textdomain( 'wp-beb', false, basename( dirname( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'nelio-maps', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 	}//end init_options()
 
@@ -66,14 +66,14 @@ class WP_BEB {
 
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
 
-        // Works only if Gutenberg is available.
-        if ( function_exists( 'register_block_type' ) ) {
+		// Works only if Gutenberg is available.
+		if ( function_exists( 'register_block_type' ) ) {
 
 			// Add Demo category.
 			add_filter( 'block_categories', [ $this, 'block_categories' ], 9 );
 
 			// Enqueue scripts and styles.
-            add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ], 9 );
+			add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ], 9 );
 
 		}//end if
 
@@ -86,7 +86,7 @@ class WP_BEB {
 			array(
 				array(
 					'slug'  => 'demo',
-					'title' => __( 'Demo', 'wp-beb' ),
+					'title' => __( 'Demo', 'nelio-maps' ),
 				),
 			)
 		);
@@ -96,7 +96,7 @@ class WP_BEB {
 	public function enqueue_block_editor_assets() {
 
 		wp_enqueue_script(
-			'wp-beb-blocks',
+			'nelio-maps-blocks',
 			untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/assets/dist/js/blocks.js',
 			[ 'wp-editor', 'wp-i18n', 'wp-element', 'wp-data', 'wp-edit-post' ],
 			$this->plugin_version,
@@ -104,18 +104,18 @@ class WP_BEB {
 		);
 
 		if ( function_exists( 'wp_set_script_translations' ) ) {
-			wp_set_script_translations( 'wp-beb-blocks', 'wp-beb' );
+			wp_set_script_translations( 'nelio-maps-blocks', 'nelio-maps' );
 		}//end if
 
 		wp_enqueue_style(
-			'wp-beb-blocks',
+			'nelio-maps-blocks',
 			untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/assets/dist/css/blocks.css',
 			[],
 			$this->plugin_version
 		);
 
 		wp_enqueue_script(
-			'wp-beb-plugin',
+			'nelio-maps-plugin',
 			untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/assets/dist/js/plugin.js',
 			[ 'wp-editor', 'wp-i18n', 'wp-element', 'wp-data', 'wp-edit-post' ],
 			$this->plugin_version,
@@ -123,11 +123,11 @@ class WP_BEB {
 		);
 
 		if ( function_exists( 'wp_set_script_translations' ) ) {
-			wp_set_script_translations( 'wp-beb-plugin', 'wp-beb' );
+			wp_set_script_translations( 'nelio-maps-plugin', 'nelio-maps' );
 		}//end if
 
 		wp_enqueue_style(
-			'wp-beb-plugin',
+			'nelio-maps-plugin',
 			untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/assets/dist/css/plugin.css',
 			[],
 			$this->plugin_version
@@ -137,11 +137,11 @@ class WP_BEB {
 
 	public function admin_init() {
 
-        // Get current plugin data.
-        $data                        = get_plugin_data( __FILE__ );
-        $this->plugin_name           = $data['Name'];
-        $this->plugin_version        = $data['Version'];
-        $this->plugin_slug           = plugin_basename( __FILE__, '.php' );
+		// Get current plugin data.
+		$data                        = get_plugin_data( __FILE__ );
+		$this->plugin_name           = $data['Name'];
+		$this->plugin_version        = $data['Version'];
+		$this->plugin_slug           = plugin_basename( __FILE__, '.php' );
 		$this->plugin_name_sanitized = basename( __FILE__, '.php' );
 
 	}//end admin_init()
@@ -152,7 +152,7 @@ class WP_BEB {
 
 }
 
-function wp_beb() {
-    return WP_BEB::instance();
-}//end wp_beb()
-add_action( 'plugins_loaded', 'wp_beb' );
+function nelio_maps() {
+	return NELIO_MAPS::instance();
+}//end nelio_maps()
+add_action( 'plugins_loaded', 'nelio_maps' );

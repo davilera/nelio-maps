@@ -146,7 +146,7 @@ module.exports = [
 // inProd?
 if ( inProduction ) {
 
-	exec( 'wp i18n make-pot . languages/wp-beb.pot --exclude=assets/dist' );
+	exec( 'wp i18n make-pot . languages/nelio-maps.pot --exclude=assets/dist' );
 
 	// Uglify JS.
 	config.plugins.push( new webpack.optimize.UglifyJsPlugin( { sourceMap: true } ) );

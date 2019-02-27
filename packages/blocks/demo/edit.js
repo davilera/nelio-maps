@@ -27,7 +27,7 @@ export default class DemoEdit extends Component {
 					className="greeting"
 					value={ greeting }
 					onChange={ value => setAttributes( { greeting: value } ) }
-					placeholder={ _x( 'Say something', 'user', 'wp-beb' ) }
+					placeholder={ _x( 'Say something', 'user', 'nelio-maps' ) }
 				/>
 
 			</div>

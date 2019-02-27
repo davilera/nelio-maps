@@ -11,7 +11,7 @@ const {
 
 function addDemoBlock() {
 
-	const demoBlock = createBlock( 'wp-beb/demo', {
+	const demoBlock = createBlock( 'nelio-maps/demo', {
 		greeting: 'Hey there!',
 		className: 'is-style-awesome',
 	} );
@@ -25,23 +25,23 @@ const PluginComponent = () => (
 	// In this case, the parent element is a Fragment.
 	<Fragment>
 		<PluginSidebarMoreMenuItem target="sidebar-name">
-			{ _x( 'My Sidebar', 'text', 'wp-beb' ) }
+			{ _x( 'My Sidebar', 'text', 'nelio-maps' ) }
 		</PluginSidebarMoreMenuItem>
 		<PluginSidebar name="sidebar-name" title="My Sidebar">
 
-			<PanelBody title={ _x( 'Color', 'text', 'wp-beb' ) }>
+			<PanelBody title={ _x( 'Color', 'text', 'nelio-maps' ) }>
 				<ColorPicker
 					onChangeComplete={ ( value ) => console.log( `The selected color was: ${ value.hex }` ) }
 				/>
 			</PanelBody>
 
-			<PanelBody title={ _x( 'Content', 'text', 'wp-beb' ) }>
+			<PanelBody title={ _x( 'Content', 'text', 'nelio-maps' ) }>
 				<Button
-					className="wp-beb-plugin-button"
+					className="nelio-maps-plugin-button"
 					isLarge
 					onClick={ () => addDemoBlock() }
 				>
-					{ _x( 'Add a demo block', 'text', 'wp-beb' ) }
+					{ _x( 'Add a demo block', 'text', 'nelio-maps' ) }
 				</Button>
 			</PanelBody>
 

@@ -1,8 +1,8 @@
 /* =================================================================== */
 /* =================================================================== */
-const BLOCK_NAME = 'wp-beb/demo';
-const BLOCK_TITLE = wp.i18n._x( 'Demo', 'text', 'wp-beb' );
-const BLOCK_DESCRIPTION = wp.i18n._x( 'Show a demo block.', 'user', 'wp-beb' );
+const BLOCK_NAME = 'nelio-maps/demo';
+const BLOCK_TITLE = wp.i18n._x( 'Demo', 'text', 'nelio-maps' );
+const BLOCK_DESCRIPTION = wp.i18n._x( 'Show a demo block.', 'user', 'nelio-maps' );
 /* =================================================================== */
 /* =================================================================== */
 
@@ -29,7 +29,7 @@ export const settings = {
 
 	category: 'demo',
 	keywords: [
-		_x( 'Demo', 'text', 'wp-beb' ),
+		_x( 'Demo', 'text', 'nelio-maps' ),
 	],
 
 	attributes,
@@ -39,6 +39,6 @@ export const settings = {
 };
 
 export const styles = [
-	{ name: 'default', label: _x( 'Default', 'text', 'wp-beb' ) },
-	{ name: 'awesome', label: _x( 'Awesome', 'text', 'wp-beb' ) },
+	{ name: 'default', label: _x( 'Default', 'text', 'nelio-maps' ) },
+	{ name: 'awesome', label: _x( 'Awesome', 'text', 'nelio-maps' ) },
 ];
