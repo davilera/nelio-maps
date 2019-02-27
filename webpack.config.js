@@ -102,9 +102,6 @@ const config = {
 		// Create RTL css.
 		new WebpackRTLPlugin(),
 
-		// Copy images and SVGs
-		new CopyWebpackPlugin( [ { from: 'assets/src/images', to: 'images' } ] ),
-
 		// Copy index.php to all dist directories.
 		new CopyWebpackPlugin( [ { from: 'index.php', to: '.' } ] ),
 		new CopyWebpackPlugin( [ { from: 'index.php', to: './js' } ] ),
@@ -125,16 +122,6 @@ module.exports = [
 		},
 
 		// Tell webpack where to output.
-		output: {
-			path: path.resolve( __dirname, './assets/dist/' ),
-			filename: 'js/[name].js',
-		},
-	}, config ),
-
-	Object.assign( {
-		entry: {
-			plugin: [ './assets/src/js/admin/plugin.js' ],
-		},
 		output: {
 			path: path.resolve( __dirname, './assets/dist/' ),
 			filename: 'js/[name].js',

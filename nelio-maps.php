@@ -114,24 +114,9 @@ class NELIO_MAPS {
 			$this->plugin_version
 		);
 
-		wp_enqueue_script(
-			'nelio-maps-plugin',
-			untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/assets/dist/js/plugin.js',
-			[ 'wp-editor', 'wp-i18n', 'wp-element', 'wp-data', 'wp-edit-post' ],
-			$this->plugin_version,
-			true
-		);
-
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations( 'nelio-maps-plugin', 'nelio-maps' );
 		}//end if
-
-		wp_enqueue_style(
-			'nelio-maps-plugin',
-			untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/assets/dist/css/plugin.css',
-			[],
-			$this->plugin_version
-		);
 
 	}//end enqueue_block_editor_assets()
 
