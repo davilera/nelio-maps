@@ -53,8 +53,8 @@
 			p.mce-content-body,
 			p.editor-rich-text__tinymce {
 				text-align: left;
-				font-size: 0.9rem;
-				line-height: 1.2;
+				font-size: 0.9rem !important;
+				line-height: 1.2 !important;
 			}
 
 		}
