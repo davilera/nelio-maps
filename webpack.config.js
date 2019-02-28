@@ -118,6 +118,18 @@ module.exports = [
 
 	Object.assign( {
 		entry: {
+			public: [ './assets/src/js/public/public.js' ],
+		},
+		output: {
+			path: path.join( __dirname, './assets/dist/' ),
+			filename: 'js/[name].js',
+			library: 'NelioBlocks',
+			libraryTarget: 'umd',
+		},
+	}, config ),
+
+	Object.assign( {
+		entry: {
 			blocks: './packages/blocks/index.js',
 		},
 

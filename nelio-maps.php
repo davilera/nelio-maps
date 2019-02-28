@@ -29,9 +29,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }//end if
 
 /**
- * NELIO_MAPS
+ * Nelio_Maps
  */
-class NELIO_MAPS {
+class Nelio_Maps {
 
 	private static $instance = null;
 
@@ -54,8 +54,8 @@ class NELIO_MAPS {
 
 	public function init_options() {
 
-		$this->plugin_path = plugin_dir_path( __FILE__ );
-		$this->plugin_url  = plugin_dir_url( __FILE__ );
+		$this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
+		$this->plugin_url  = untrailingslashit( plugin_dir_url( __FILE__ ) );
 
 		// load textdomain.
 		load_plugin_textdomain( 'nelio-maps', false, basename( dirname( __FILE__ ) ) . '/languages' );
@@ -73,6 +73,7 @@ class NELIO_MAPS {
 		add_action( 'init', [ $this, 'register_google_maps_api_key_option' ] );
 		add_filter( 'block_categories', [ $this, 'add_extra_category' ], 9 );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ], 9 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_block_assets' ] );
 
 	}//end init_hooks()
 
@@ -126,6 +127,39 @@ class NELIO_MAPS {
 
 	}//end enqueue_block_editor_assets()
 
+	public function enqueue_block_assets() {
+
+		wp_register_script(
+			'google-maps',
+			add_query_arg(
+				array(
+					'key'       => get_option( 'nelio_maps_api_key_option', '' ),
+					'libraries' => 'geometry,drawing,places',
+				),
+				'https://maps.googleapis.com/maps/api/js'
+			),
+			[],
+			$this->plugin_version,
+			true
+		);
+
+		wp_enqueue_style(
+			'nelio-blocks-gutenberg',
+			$this->plugin_url . '/assets/dist/css/blocks.css',
+			[],
+			$this->plugin_version
+		);
+
+		wp_enqueue_script(
+			'nelio-blocks',
+			$this->plugin_url . '/assets/dist/js/public.js',
+			[ 'google-maps' ],
+			$this->plugin_version,
+			true
+		);
+
+	}//end enqueue_block_assets()
+
 	public function admin_init() {
 
 		// Get current plugin data.
@@ -147,6 +181,6 @@ class NELIO_MAPS {
 }//end class
 
 function nelio_maps() {
-	return NELIO_MAPS::instance();
+	return Nelio_Maps::instance();
 }//end nelio_maps()
 add_action( 'plugins_loaded', 'nelio_maps' );
