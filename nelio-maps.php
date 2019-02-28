@@ -111,8 +111,14 @@ class NELIO_MAPS {
 			$this->plugin_version
 		);
 
-		$api_key = get_option( 'nelio_maps_api_key_option', '' );
-		wp_localize_script( 'nelio-maps-blocks', 'NelioMaps', [ 'googleMapsApiKey' => $api_key ] );
+		wp_localize_script(
+			'nelio-maps-blocks',
+			'NelioMaps',
+			array(
+				'googleMapsApiKey' => get_option( 'nelio_maps_api_key_option', '' ),
+				'optionsPageUrl'   => admin_url( 'options.php#nelio_maps_api_key_option' ),
+			)
+		);
 
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations( 'nelio-maps-plugin', 'nelio-maps' );

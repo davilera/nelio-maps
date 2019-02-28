@@ -15,7 +15,7 @@ const {
 	Fragment,
 } = wp.element;
 
-const { googleMapsApiKey } = NelioMaps;
+const { googleMapsApiKey, optionsPageUrl } = NelioMaps;
 const GOOGLE_MAPS_URL = 'https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places';
 
 export default class GoogleMapEdit extends Component {
@@ -123,7 +123,11 @@ export default class GoogleMapEdit extends Component {
 							<div><Dashicon icon="location" /></div>
 							<div className="nelio-maps-google-map-placeholder-key">
 								<p><span className="screen-reader-text">{ _x( 'Error:', 'text', 'nelio-maps' ) }</span> { _x( 'Google Maps API Key Required', 'text', 'nelio-maps' ) }</p>
-								<p>{ _x( 'Please add an API key in the plugin settings screen.', 'text', 'nelio-maps' ) }</p>
+								<p><a
+									href={ optionsPageUrl }
+									target="_blank"
+									rel="noopener noreferrer"
+								>{ _x( 'Please add an API key in the plugin settings screen', 'user', 'nelio-maps' ) }</a></p>
 							</div>
 						</div>
 
