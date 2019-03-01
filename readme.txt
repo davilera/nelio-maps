@@ -36,11 +36,11 @@ Please adhere to [these instructions](https://neliosoftware.com/blog/how-to-gene
 
 == Screenshots ==
 
-1. This screenshot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screenshot
+1. Add beautiful Google Maps in your pages or posts.
+2. Change the style of your maps using one of the predefined styles or use your own.
+3. Customize your maps' buttons and behavior with simple and comprehensible settings.
+4. Add one marker in your map.
+5. Find locations easily with the integrated search field.
 
 == Changelog ==
 
