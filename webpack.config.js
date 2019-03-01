@@ -66,6 +66,12 @@ const config = {
 			// Image files.
 			{
 				test: /\.(png|jpe?g|gif)$/,
+				issuer: /\.js$/,
+				loader: 'base64-inline-loader',
+			},
+			{
+				test: /\.(png|jpe?g|gif)$/,
+				issuer: /[^\.][^j][^s]$/,
 				use: [
 					{
 						loader: 'file-loader',
