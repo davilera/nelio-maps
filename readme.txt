@@ -46,6 +46,7 @@ Please adhere to [these instructions](https://neliosoftware.com/blog/how-to-gene
 
 = 1.0.1 =
 * Modified CSS and JS handlers.
+* Fixed positioning of marker address.
 
 = 1.0.0 =
 * First release.
