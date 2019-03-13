@@ -15,7 +15,7 @@
  * Plugin Name: Nelio Maps
  * Plugin URI:  https://neliosoftware.com/
  * Description: Simple and beautiful Google Maps block for WordPress.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      Nelio Software
  * Author URI:  https://neliosoftware.com
  * License:     GPL-2.0+
@@ -144,14 +144,14 @@ class Nelio_Maps {
 		);
 
 		wp_enqueue_style(
-			'nelio-blocks-gutenberg',
+			'nelio-maps-gutenberg',
 			$this->plugin_url . '/assets/dist/css/blocks.css',
 			[],
 			$this->plugin_version
 		);
 
 		wp_enqueue_script(
-			'nelio-blocks',
+			'nelio-maps',
 			$this->plugin_url . '/assets/dist/js/public.js',
 			[ 'google-maps' ],
 			$this->plugin_version,
