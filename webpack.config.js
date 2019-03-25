@@ -129,8 +129,6 @@ module.exports = [
 		output: {
 			path: path.join( __dirname, './assets/dist/' ),
 			filename: 'js/[name].js',
-			library: 'NelioBlocks',
-			libraryTarget: 'umd',
 		},
 	}, config ),
 
