@@ -1,5 +1,5 @@
 === Nelio Maps ===
-Contributors: davilera, avillegasn
+Contributors: nelio, davilera, avillegasn
 Donate Link: https://neliosoftware.com/
 Tags: gutenberg, block, google maps, map
 Requires at least: 5.0
