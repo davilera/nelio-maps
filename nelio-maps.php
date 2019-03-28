@@ -162,10 +162,10 @@ class Nelio_Maps {
 
 	public function admin_init() {
 
-		// Get current plugin data.
-		$data                        = get_plugin_data( __FILE__ );
-		$this->plugin_name           = $data['Name'];
-		$this->plugin_version        = $data['Version'];
+		$data = get_file_data( __FILE__, [ 'Plugin Name', 'Version' ], 'plugin' );
+
+		$this->plugin_name           = $data[0];
+		$this->plugin_version        = $data[1];
 		$this->plugin_slug           = plugin_basename( __FILE__, '.php' );
 		$this->plugin_name_sanitized = basename( __FILE__, '.php' );
 
