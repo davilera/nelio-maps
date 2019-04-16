@@ -71,13 +71,17 @@ class Nelio_Maps {
 		}//end if
 
 		add_action( 'init', [ $this, 'register_google_maps_api_key_option' ] );
-		add_filter( 'block_categories', [ $this, 'add_extra_category' ], 9 );
+		add_filter( 'block_categories', [ $this, 'add_extra_category' ], 99 );
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ], 9 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_block_assets' ] );
 
 	}//end init_hooks()
 
 	public function add_extra_category( $categories ) {
+
+		if ( count( array_filter( $categories, function( $category ) { return 'extra' === $category['slug']; } ) ) ) {
+			return $categories;
+		}//end if
 
 		return array_merge(
 			$categories,
