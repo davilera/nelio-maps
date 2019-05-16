@@ -28,6 +28,7 @@ export default class ImagePicker extends Component {
 						<button
 							key={ `image-picker-${ option.value }` }
 							onClick={ () => onChange( option.value, option ) }
+							aria-pressed={ (value === option.value).toString() }
 							className={ classnames( 'nelio-maps-image-picker-item', { 'nelio-maps-image-picker-item-active': value === option.value } ) }
 						>
 							{ option.image && 'string' === typeof option.image && (
