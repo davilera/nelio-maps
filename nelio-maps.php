@@ -1,26 +1,23 @@
 <?php
 /**
- * The plugin bootstrap file.
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
- * @link              https://neliosoftware.com
- * @since             1.0.0
- * @package           NELIO_MAPS
+ * The plugin bootstrap file
  *
  * @wordpress-plugin
- * Plugin Name: Nelio Maps
- * Plugin URI:  https://neliosoftware.com/
- * Description: Simple and beautiful Google Maps block for WordPress.
- * Version:     1.0.1
- * Author:      Nelio Software
- * Author URI:  https://neliosoftware.com
- * License:     GPL-2.0+
- * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain: nelio-maps
+ * Plugin Name:       Nelio Maps
+ * Plugin URI:        https://neliosoftware.com
+ * Description:       Simple and beautiful Google Maps block for WordPress.
+ * Version:           1.0.2
+ *
+ * Author:            Nelio Software
+ * Author URI:        http://neliosoftware.com
+ * License:           GPL-3.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
+ *
+ * Text Domain:       nelio-maps
+ *
+ * @package Nelio_Maps
+ * @author  David Aguilera <david.aguilera@neliosoftware.com>
+ * @since   1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -96,11 +93,12 @@ class Nelio_Maps {
 
 	public function enqueue_block_editor_assets() {
 
+		$script_meta = require $this->plugin_path . '/assets/dist/blocks.asset.php';
 		wp_enqueue_script(
 			'nelio-maps-blocks',
-			untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/assets/dist/js/blocks.js',
-			[ 'wp-editor', 'wp-i18n', 'wp-element', 'wp-data', 'wp-edit-post' ],
-			$this->plugin_version,
+			untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/assets/dist/blocks.js',
+			$script_meta['dependencies'],
+			$script_meta['version'],
 			true
 		);
 
@@ -153,11 +151,12 @@ class Nelio_Maps {
 			$this->plugin_version
 		);
 
+		$script_meta = require $this->plugin_path . '/assets/dist/public.asset.php';
 		wp_enqueue_script(
 			'nelio-maps',
-			$this->plugin_url . '/assets/dist/js/public.js',
-			[ 'google-maps' ],
-			$this->plugin_version,
+			$this->plugin_url . '/assets/dist/public.js',
+			$script_meta['dependencies'],
+			$script_meta['version'],
 			true
 		);
 

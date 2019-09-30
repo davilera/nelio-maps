@@ -1,26 +1,36 @@
-import classnames from 'classnames';
-import AddressSearch from './address-search';
+/**
+ * WordPress dependencies
+ */
+import { _x } from '@wordpress/i18n';
 
-const { _x } = wp.i18n;
-
-const {
+import {
 	Component,
 	Fragment,
-} = wp.element;
+} from '@wordpress/element';
 
-const {
+import {
 	BlockControls,
 	BlockAlignmentToolbar,
-} = wp.editor;
+} from '@wordpress/editor';
 
-const {
+import {
 	Button,
 	Dashicon,
 	Dropdown,
 	IconButton,
 	Toolbar,
 	Tooltip,
-} = wp.components;
+} from '@wordpress/components';
+
+/**
+ * External dependencies
+ */
+import classnames from 'classnames';
+
+/**
+ * Internal dependencies
+ */
+import AddressSearch from './address-search';
 
 export default class ToolbarControls extends Component {
 
@@ -42,7 +52,7 @@ export default class ToolbarControls extends Component {
 				<BlockAlignmentToolbar
 					value={ blockAlignment }
 					controls={ [ 'center', 'wide', 'full' ] }
-					onChange={ value => setAttributes( { blockAlignment: value } ) }
+					onChange={ ( value ) => setAttributes( { blockAlignment: value } ) }
 				/>
 
 				<Toolbar>

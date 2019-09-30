@@ -1,3 +1,16 @@
+/**
+ * WordPress dependencies
+ */
+import { _x } from '@wordpress/i18n';
+import {
+	Component,
+	Fragment,
+} from '@wordpress/element';
+import { TextareaControl } from '@wordpress/components';
+
+/**
+ * Internal dependencies
+ */
 import ImagePicker from '../../../components/image-picker/image-picker';
 
 import defaultMapStyle from './default';
@@ -6,13 +19,6 @@ import lightMapStyle from './light';
 import dawnMapStyle from './dawn';
 import nightMapStyle from './night';
 import customMapStyle from './custom';
-
-const { _x } = wp.i18n;
-const {
-	Component,
-	Fragment,
-} = wp.element;
-const { TextareaControl } = wp.components;
 
 const styles = [
 	defaultMapStyle,
@@ -54,7 +60,7 @@ export default class MapStyles extends Component {
 							</p>
 						}
 						value={ customStyle || '' }
-						onChange={ style => onChange( 'custom', style ) }
+						onChange={ ( style ) => onChange( 'custom', style ) }
 					/>
 				) }
 

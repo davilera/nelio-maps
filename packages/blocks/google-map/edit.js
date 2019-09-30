@@ -1,21 +1,30 @@
-import classnames from 'classnames';
+/**
+ * WordPress dependencies
+ */
+import { _x } from '@wordpress/i18n';
+import { RichText } from '@wordpress/editor';
+import { Dashicon } from '@wordpress/components';
+import {
+	Component,
+	Fragment,
+} from '@wordpress/element';
 
+/**
+ * External dependencies
+ */
+import classnames from 'classnames';
+import { Marker } from 'react-google-maps';
+import { debounce } from 'lodash';
+
+/**
+ * Internal dependencies
+ */
 import Inspector from './inspector';
 import ToolbarControls from './toolbar';
 
 import MapBlock from './map-block';
-import { Marker } from 'react-google-maps';
 
-const { debounce } = _;
-const { _x } = wp.i18n;
-const { RichText } = wp.editor;
-const { Dashicon } = wp.components;
-const {
-	Component,
-	Fragment,
-} = wp.element;
-
-const { googleMapsApiKey, optionsPageUrl } = NelioMaps;
+const { googleMapsApiKey, optionsPageUrl } = window.NelioMaps;
 const GOOGLE_MAPS_URL = 'https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing,places';
 
 export default class GoogleMapEdit extends Component {
@@ -91,7 +100,7 @@ export default class GoogleMapEdit extends Component {
 								defaultZoom={ zoom }
 								defaultCenter={ { lat, lng } }
 								defaultOptions={ options }
-								onZoomChanged={ debounce( value => setAttributes( { zoom: value } ), 500 ) }
+								onZoomChanged={ debounce( ( value ) => setAttributes( { zoom: value } ), 500 ) }
 								onCenterChanged={ debounce( ( _lat, _lng ) => setAttributes( { lat: _lat, lng: _lng } ), 500 ) }
 							>
 								<Marker
@@ -108,7 +117,7 @@ export default class GoogleMapEdit extends Component {
 									<RichText
 										tagName="p"
 										value={ address }
-										onChange={ value => setAttributes( { address: value } ) }
+										onChange={ ( value ) => setAttributes( { address: value } ) }
 										placeholder={ _x( 'Add address', 'user', 'nelio-maps' ) }
 										keepPlaceholderOnFocus={ true }
 									/>

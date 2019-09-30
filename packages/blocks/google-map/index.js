@@ -6,6 +6,9 @@ const BLOCK_DESCRIPTION = wp.i18n._x( 'Add and customize a beautiful Google Map 
 /* =================================================================== */
 /* =================================================================== */
 
+/**
+ * Internal dependencies
+ */
 import './styles/style.scss';
 import './styles/editor.scss';
 

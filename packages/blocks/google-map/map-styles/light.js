@@ -1,6 +1,12 @@
-import image from './light.png';
+/**
+ * WordPress dependencies
+ */
+import { _x } from '@wordpress/i18n';
 
-const { _x } = wp.i18n;
+/**
+ * Internal dependencies
+ */
+import image from './light.png';
 
 export default {
 

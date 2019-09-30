@@ -1,21 +1,27 @@
-import MapStyles from './map-styles/map-styles';
-import AddressSearch from './address-search';
-
-const { _x } = wp.i18n;
-const {
+/**
+ * WordPress dependencies
+ */
+import { _x } from '@wordpress/i18n';
+import {
 	Component,
 	Fragment,
-} = wp.element;
-const { InspectorControls } = wp.editor;
-const {
+} from '@wordpress/element';
+import { InspectorControls } from '@wordpress/editor';
+import {
 	CheckboxControl,
 	ToggleControl,
 	PanelBody,
 	RangeControl,
 	SelectControl,
-} = wp.components;
+} from '@wordpress/components';
 
-const { googleMapsApiKey } = NelioMaps;
+/**
+ * Internal dependencies
+ */
+import MapStyles from './map-styles/map-styles';
+import AddressSearch from './address-search';
+
+const { googleMapsApiKey } = window.NelioMaps;
 
 export default class Inspector extends Component {
 
@@ -49,7 +55,7 @@ export default class Inspector extends Component {
 							<RangeControl
 								label={ _x( 'Map Height', 'text', 'nelio-maps' ) }
 								value={ height }
-								onChange={ value => setAttributes( { height: Math.min( Math.max( value, 20 ), 100 ) } ) }
+								onChange={ ( value ) => setAttributes( { height: Math.min( Math.max( value, 20 ), 100 ) } ) }
 								help={ _x( 'Percentage of the viewport height.', 'text', 'nelio-maps' ) }
 								min={ 20 }
 								max={ 100 }
@@ -58,7 +64,7 @@ export default class Inspector extends Component {
 							<RangeControl
 								label={ _x( 'Zoom Level', 'text', 'nelio-maps' ) }
 								value={ zoom }
-								onChange={ value => setAttributes( { zoom: value } ) }
+								onChange={ ( value ) => setAttributes( { zoom: value } ) }
 								min={ 1 }
 								max={ 18 }
 							/>
@@ -86,7 +92,7 @@ export default class Inspector extends Component {
 							<ToggleControl
 								label={ _x( 'Marker in map', 'text', 'nelio-maps' ) }
 								checked={ !! isMarkerVisible }
-								onChange={ value => setAttributes( { isMarkerVisible: value } ) }
+								onChange={ ( value ) => setAttributes( { isMarkerVisible: value } ) }
 							/>
 
 							{ isMarkerVisible && (
@@ -110,7 +116,7 @@ export default class Inspector extends Component {
 											{ value: 'left', label: _x( 'Align left', 'command', 'nelio-maps' ) },
 											{ value: 'right', label: _x( 'Align right', 'command', 'nelio-maps' ) },
 										] }
-										onChange={ value => setAttributes( { addressAlignment: value } ) }
+										onChange={ ( value ) => setAttributes( { addressAlignment: value } ) }
 									/>
 
 								</Fragment>
@@ -128,25 +134,25 @@ export default class Inspector extends Component {
 							<CheckboxControl
 								label={ _x( 'Show zoom buttons', 'command', 'nelio-maps' ) }
 								checked={ !! areZoomButtonsVisible }
-								onChange={ value => setAttributes( { areZoomButtonsVisible: value } ) }
+								onChange={ ( value ) => setAttributes( { areZoomButtonsVisible: value } ) }
 							/>
 
 							<CheckboxControl
 								label={ _x( 'Show map type button', 'command', 'nelio-maps' ) }
 								checked={ !! isMapTypeButtonVisible }
-								onChange={ value => setAttributes( { isMapTypeButtonVisible: value } ) }
+								onChange={ ( value ) => setAttributes( { isMapTypeButtonVisible: value } ) }
 							/>
 
 							<CheckboxControl
 								label={ _x( 'Show fullscreen button', 'command', 'nelio-maps' ) }
 								checked={ !! isFullScreenButtonVisible }
-								onChange={ value => setAttributes( { isFullScreenButtonVisible: value } ) }
+								onChange={ ( value ) => setAttributes( { isFullScreenButtonVisible: value } ) }
 							/>
 
 							<CheckboxControl
 								label={ _x( 'Make the map draggable', 'command', 'nelio-maps' ) }
 								checked={ !! isDraggable }
-								onChange={ value => setAttributes( { isDraggable: value } ) }
+								onChange={ ( value ) => setAttributes( { isDraggable: value } ) }
 							/>
 
 						</PanelBody>

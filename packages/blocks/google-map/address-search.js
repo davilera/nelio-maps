@@ -1,3 +1,13 @@
+/**
+ * WordPress dependencies
+ */
+import {
+	TextControl,
+} from '@wordpress/components';
+
+/**
+ * External dependencies
+ */
 import { withScriptjs } from 'react-google-maps';
 import {
 	compose,
@@ -8,13 +18,9 @@ import {
 
 const { StandaloneSearchBox } = require( 'react-google-maps/lib/components/places/StandaloneSearchBox' );
 
-const {
-	TextControl,
-} = wp.components;
-
 const AddressSearch = compose(
 
-	withState( 'value', 'setValue', props => {
+	withState( 'value', 'setValue', ( props ) => {
 		return props.value;
 	} ),
 
@@ -30,7 +36,7 @@ const AddressSearch = compose(
 
 		return {
 
-			onSearchBoxMounted: () => ref => {
+			onSearchBoxMounted: () => ( ref ) => {
 				refs.searchBox = ref;
 			},
 
@@ -53,7 +59,7 @@ const AddressSearch = compose(
 
 	withScriptjs,
 
-)( props => {
+)( ( props ) => {
 
 	const {
 		bounds,
@@ -80,7 +86,7 @@ const AddressSearch = compose(
 					label={ label }
 					placeholder={ placeholder }
 					value={ value }
-					onChange={ newValue => setValue( newValue ) }
+					onChange={ ( newValue ) => setValue( newValue ) }
 				/>
 			</StandaloneSearchBox>
 		</div>

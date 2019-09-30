@@ -1,3 +1,6 @@
+/**
+ * External dependencies
+ */
 import { compose, withProps, withHandlers } from 'recompose';
 import {
 	withScriptjs,
@@ -16,13 +19,13 @@ const MapBlock = compose(
 		};
 
 		return {
-			onMapMounted: () => ref => {
+			onMapMounted: () => ( ref ) => {
 				refs.map = ref;
 			},
-			onZoomChanged: props => () => {
+			onZoomChanged: ( props ) => () => {
 				props.onZoomChanged( refs.map.getZoom() );
 			},
-			onCenterChanged: props => () => {
+			onCenterChanged: ( props ) => () => {
 
 				const center = refs.map.getCenter();
 

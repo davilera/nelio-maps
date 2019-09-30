@@ -1,8 +1,14 @@
+/**
+ * WordPress dependencies
+ */
+import { RichText } from '@wordpress/editor';
+
+/**
+ * External dependencies
+ */
 import classnames from 'classnames';
 
-const { RichText } = wp.editor;
-
-const GoogleMapSave = props => {
+const GoogleMapSave = ( props ) => {
 
 	const {
 		attributes: {
