@@ -44,6 +44,11 @@ Please adhere to [these instructions](https://neliosoftware.com/blog/how-to-gene
 
 == Changelog ==
 
+= 1.0.2 =
+* Added options page to easily specify Google API Key.
+* Improved internationalization.
+* Simplified developer dependencies.
+
 = 1.0.1 =
 * Modified CSS and JS handlers.
 * Fixed positioning of marker address.

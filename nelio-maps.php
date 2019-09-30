@@ -77,6 +77,10 @@ class Nelio_Maps {
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_block_editor_assets' ], 9 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_block_assets' ] );
 
+		if ( is_admin() ) {
+			require_once $this->plugin_path . '/options.php';
+		}//end if
+
 	}//end init_hooks()
 
 	public function add_extra_category( $categories ) {
@@ -124,7 +128,7 @@ class Nelio_Maps {
 			'NelioMaps',
 			array(
 				'googleMapsApiKey' => get_option( 'nelio_maps_api_key_option', '' ),
-				'optionsPageUrl'   => admin_url( 'options.php#nelio_maps_api_key_option' ),
+				'optionsPageUrl'   => admin_url( 'options-general.php?page=nelio-maps' ),
 			)
 		);
 
@@ -157,7 +161,7 @@ class Nelio_Maps {
 		wp_enqueue_script(
 			'nelio-maps',
 			$this->plugin_url . '/assets/dist/public.js',
-			$script_meta['dependencies'],
+			array_merge( $script_meta['dependencies'], [ 'google-maps' ] ),
 			$script_meta['version'],
 			true
 		);
