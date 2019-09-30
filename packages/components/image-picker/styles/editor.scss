@@ -5,58 +5,58 @@ $gray: #555d66 !default;
 $light-gray: #f8f9f9 !default;
 
 .nelio-maps-image-picker {
-    .components-base-control__field {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+	.components-base-control__field {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
 
-        > .components-base-control__label {
-            min-width: 100%;
-        }
-    }
+		> .components-base-control__label {
+			min-width: 100%;
+		}
+	}
 
-    .nelio-maps-image-picker-item {
-        width: calc( 50% - 4px );
-        padding: 4px;
-        margin: 4px 0;
-        flex-shrink: 0;
-        overflow: hidden;
-        color: inherit;
-        cursor: pointer;
-        background: none;
-        border: none;
-        border-radius: 4px;
+	.nelio-maps-image-picker-item {
+		width: calc(50% - 4px);
+		padding: 4px;
+		margin: 4px 0;
+		flex-shrink: 0;
+		overflow: hidden;
+		color: inherit;
+		cursor: pointer;
+		background: none;
+		border: none;
+		border-radius: 4px;
 
-        &:hover {
-            color: $dark-gray;
-            background: $light-gray;
-        }
+		&:hover {
+			color: $dark-gray;
+			background: $light-gray;
+		}
 
-        &.nelio-maps-image-picker-item-active {
-            color: $dark-gray;
-            outline: 2px solid transparent;
-            outline-offset: -2px;
-            box-shadow: 0 0 0 2px $gray;
-        }
+		&.nelio-maps-image-picker-item-active {
+			color: $dark-gray;
+			outline: 2px solid transparent;
+			outline-offset: -2px;
+			box-shadow: 0 0 0 2px $gray;
+		}
 
-        &:focus {
-            color: $dark-gray;
-            outline: 2px solid transparent;
-            outline-offset: -2px;
-            box-shadow: 0 0 0 2px $blue;
-        }
+		&:focus {
+			color: $dark-gray;
+			outline: 2px solid transparent;
+			outline-offset: -2px;
+			box-shadow: 0 0 0 2px $blue;
+		}
 
-        img {
-            display: block;
-            border: 1px solid rgba( $dark-blue, .2 );
-            border-radius: 4px;
-            outline: 1px solid transparent;
-        }
+		img {
+			display: block;
+			border: 1px solid rgba($dark-blue, 0.2);
+			border-radius: 4px;
+			outline: 1px solid transparent;
+		}
 
-        span {
-            display: block;
-            padding: 4px 2px;
-            text-align: center;
-        }
-    }
+		span {
+			display: block;
+			padding: 4px 2px;
+			text-align: center;
+		}
+	}
 }

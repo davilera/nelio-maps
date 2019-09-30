@@ -114,7 +114,7 @@ class Nelio_Maps {
 
 		wp_enqueue_style(
 			'nelio-maps-blocks',
-			untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/assets/dist/css/blocks.css',
+			untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/assets/dist/blocks.css',
 			[],
 			$this->plugin_version
 		);
@@ -148,7 +148,7 @@ class Nelio_Maps {
 
 		wp_enqueue_style(
 			'nelio-maps-gutenberg',
-			$this->plugin_url . '/assets/dist/css/blocks.css',
+			$this->plugin_url . '/assets/dist/blocks.css',
 			[],
 			$this->plugin_version
 		);
