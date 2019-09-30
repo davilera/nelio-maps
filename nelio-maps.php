@@ -21,7 +21,6 @@
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: nelio-maps
- * Domain Path: /languages
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -58,7 +57,7 @@ class Nelio_Maps {
 		$this->plugin_url  = untrailingslashit( plugin_dir_url( __FILE__ ) );
 
 		// load textdomain.
-		load_plugin_textdomain( 'nelio-maps', false, basename( dirname( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'nelio-maps' );
 
 	}//end init_options()
 

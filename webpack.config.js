@@ -1,77 +1,42 @@
-const path = require( 'path' );
-const webpack = require( 'webpack' );
-const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
-const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
-const ImageminPlugin = require( 'imagemin-webpack-plugin' ).default;
-const CleanWebpackPlugin = require( 'clean-webpack-plugin' );
+/**
+ * External dependencies
+ */
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const WebpackRTLPlugin = require( 'webpack-rtl-plugin' );
-const ProgressBarPlugin = require( 'progress-bar-webpack-plugin' );
-const { exec } = require( 'child_process' );
+const path = require( 'path' );
 
-const inProduction = ( 'production' === process.env.NODE_ENV );
+/**
+ * WordPress dependencies
+ */
+const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+const isProduction = defaultConfig.mode === 'production';
 
 const config = {
-
-	// Ensure modules like magnific know jQuery is external (loaded via WP).
-	externals: {
-		$: 'jQuery',
-		jquery: 'jQuery',
-		lodash: 'lodash',
-		react: 'React',
-		localStorage: 'localStorage',
-	},
-	devtool: 'source-map',
+	...defaultConfig,
+	plugins: [
+		...defaultConfig.plugins,
+		new WebpackRTLPlugin( {
+			suffix: '-rtl',
+			minify: isProduction ? { safe: true } : false,
+		} ),
+		new MiniCssExtractPlugin(),
+	],
 	module: {
+		...defaultConfig.module,
 		rules: [
-
-			// Use Babel to compile JS.
+			...defaultConfig.module.rules,
 			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loaders: [
-					'babel-loader',
+				test: /.svg$/,
+				issuer: /\.js$/,
+				use: [
+					{
+						loader: 'svg-react-loader',
+					},
 				],
 			},
-
-			// Create RTL styles.
-			{
-				test: /\.css$/,
-				loader: ExtractTextPlugin.extract( 'style-loader' ),
-			},
-
-			// SASS to CSS.
-			{
-				test: /\.scss$/,
-				use: ExtractTextPlugin.extract( {
-					use: [ {
-						loader: 'css-loader',
-						options: {
-							sourceMap: true,
-						},
-					}, {
-						loader: 'postcss-loader',
-						options: {
-							sourceMap: true,
-						},
-					}, {
-						loader: 'sass-loader',
-						options: {
-							sourceMap: true,
-							outputStyle: ( inProduction ? 'compressed' : 'nested' ),
-						},
-					} ],
-				} ),
-			},
-
-			// Image files.
 			{
 				test: /\.(png|jpe?g|gif)$/,
 				issuer: /\.js$/,
-				loader: 'base64-inline-loader',
-			},
-			{
-				test: /\.(png|jpe?g|gif)$/,
-				issuer: /[^\.][^j][^s]$/,
 				use: [
 					{
 						loader: 'file-loader',
@@ -79,82 +44,41 @@ const config = {
 							name: 'images/[name].[ext]',
 							publicPath: '../',
 						},
+						loader: 'base64-inline-loader',
 					},
 				],
 			},
-
-			// SVG files.
 			{
-				test: /.svg$/,
+				test: /\.s?css$/,
 				use: [
 					{
-						loader: 'svg-react-loader',
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							hmr: ! isProduction,
+						},
 					},
+					'css-loader',
+					'postcss-loader',
+					'sass-loader',
 				],
 			},
 		],
 	},
-
-	// Plugins. Gotta have em'.
-	plugins: [
-
-		new ProgressBarPlugin( { clear: false } ),
-
-		// Removes the "dist" folder before building.
-		new CleanWebpackPlugin( [ 'assets/dist' ] ),
-
-		new ExtractTextPlugin( 'css/[name].css' ),
-
-		// Create RTL css.
-		new WebpackRTLPlugin(),
-
-		// Copy index.php to all dist directories.
-		new CopyWebpackPlugin( [ { from: 'index.php', to: '.' } ] ),
-		new CopyWebpackPlugin( [ { from: 'index.php', to: './js' } ] ),
-		new CopyWebpackPlugin( [ { from: 'index.php', to: './css' } ] ),
-
-		// Minify images.
-		// Must go after CopyWebpackPlugin above: https://github.com/Klathmon/imagemin-webpack-plugin#example-usage
-		new ImageminPlugin( { test: /\.(jpe?g|png|gif|svg)$/i } ),
-
-	],
 };
 
 module.exports = [
 
-	Object.assign( {
-		entry: {
-			public: [ './assets/src/js/public/public.js' ],
-		},
-		output: {
-			path: path.join( __dirname, './assets/dist/' ),
-			filename: 'js/[name].js',
-		},
-	}, config ),
-
-	Object.assign( {
+	{
+		...config,
 		entry: {
 			blocks: './packages/blocks/index.js',
+			public: './assets/src/js/public/public.js',
 		},
-
-		// Tell webpack where to output.
 		output: {
 			path: path.resolve( __dirname, './assets/dist/' ),
 			filename: 'js/[name].js',
-		},
-	}, config ),
+		}
+	},
 
 ];
 
-// inProd?
-if ( inProduction ) {
-
-	exec( 'wp i18n make-pot . languages/nelio-maps.pot --exclude=assets/dist' );
-
-	// Uglify JS.
-	config.plugins.push( new webpack.optimize.UglifyJsPlugin( { sourceMap: true } ) );
-
-	// Minify CSS.
-	config.plugins.push( new webpack.LoaderOptionsPlugin( { minimize: true } ) );
-
-}

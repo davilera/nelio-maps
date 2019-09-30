@@ -6,6 +6,11 @@
 	<!-- Set a description for this ruleset. -->
 	<description>A custom set of code standard rules to check for WordPress themes and plugins.</description>
 
+	<file>.</file>
+	<exclude-pattern>vendor</exclude-pattern>
+	<exclude-pattern>node_modules</exclude-pattern>
+	<exclude-pattern>*.js</exclude-pattern>
+
 	<!-- Include the WordPress ruleset, with exclusions. -->
 	<rule ref="WordPress">
 		<exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedCATCH" />
