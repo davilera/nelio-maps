@@ -24,6 +24,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }//end if
 
+define( 'NELIO_MAPS', true );
+
+function nelio_maps() {
+	return Nelio_Maps::instance();
+}//end nelio_maps()
+
 /**
  * Nelio_Maps
  */
@@ -122,10 +128,6 @@ class Nelio_Maps {
 			)
 		);
 
-		if ( function_exists( 'wp_set_script_translations' ) ) {
-			wp_set_script_translations( 'nelio-maps-plugin', 'nelio-maps' );
-		}//end if
-
 	}//end enqueue_block_editor_assets()
 
 	public function enqueue_block_assets() {
@@ -182,7 +184,5 @@ class Nelio_Maps {
 
 }//end class
 
-function nelio_maps() {
-	return Nelio_Maps::instance();
-}//end nelio_maps()
-add_action( 'plugins_loaded', 'nelio_maps' );
+// Start plugin.
+nelio_maps();
